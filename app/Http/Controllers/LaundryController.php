@@ -55,9 +55,9 @@ if ($validator->fails()) {
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Laundry $laundry)
+    public function update(Request $request, $laundry)
     {
-        $laundry->update($request->all());
+        $update = Laundry::where('id_laundry',$laundry)->update(['name'=>$request->name,'image'=>$request->image,'description'=>$request->description,'price'=>$request->price,'category'=>$request->category,'long'=>$request->long,'lat'=>$request->lat])
 
         return response()->json($laundry, 200);
     }
@@ -70,8 +70,8 @@ if ($validator->fails()) {
      */
     public function laundry(Request $laundry)
     {
-        $laundry = $laundry->laundry;
-        return Laundry::where('id_laundry',$laundry) -> get();
+            $laundry = $laundry->laundry;
+            return Laundry::where('id_laundry',$laundry) -> get();
     }
 
     /**
@@ -80,7 +80,7 @@ if ($validator->fails()) {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $laundry)
+    public function destroy($laundry)
     {
         Laundry::where('id_laundry',$laundry) -> delete();
 

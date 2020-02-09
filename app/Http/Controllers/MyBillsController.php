@@ -94,7 +94,7 @@ class MyBillsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $mybills)
+    public function destroy($mybills)
     {
         MyBills::where('id_bills',$mybills) -> delete();
 

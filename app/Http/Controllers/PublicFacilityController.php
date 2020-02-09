@@ -61,9 +61,9 @@ if ($validator->fails()) {
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Food $public)
+    public function update(Request $request, $public)
     {
-        $public->update($request->all());
+        $update = PublicFacility::where('id_public_facility',$public)->update(['name'=>$request->name,'image'=>$request->image,'description'=>$request->description,'buka'=>$request->buka,'tutup'=>$request->tutup,'category'=>$request->category,'long'=>$request->long,'lat'=>$request->lat])
 
         return response()->json($public, 200);
     }
@@ -74,10 +74,10 @@ if ($validator->fails()) {
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function publicfac(Request $publicfac)
+    public function publicfac(Request $request, $publicfac)
     {
-        $publicfac = $publicfac->publicfac;
-        return PublicFacility::where('id_public_facility',$publicfac) -> get();
+            $publicfac = $publicfac->publicfac;
+            return Laundry::where('id_public_facility',$publicfac) -> get();
     }
 
     /**
@@ -86,7 +86,7 @@ if ($validator->fails()) {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $public)
+    public function destroy($public)
     {
         PublicFacility::where('id_public_facility',$public) -> delete();
 

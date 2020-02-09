@@ -51,9 +51,9 @@ if ($validator->fails()) {
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $category)
     {
-        $category->update($request->all());
+        $update = Category::where('id_category',$category)->update(['name'=>$request->name,'image'=>$request->image,'table'=>$request->table,])
 
         return response()->json($category, 200);
     }
@@ -76,7 +76,7 @@ if ($validator->fails()) {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $category)
+    public function destroy($category)
     {
         Category::where('id_category',$category) -> delete();
 

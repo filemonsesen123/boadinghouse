@@ -59,9 +59,9 @@ if ($validator->fails()) {
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Food $food)
+    public function update(Request $request, $food)
     {
-        $food->update($request->all());
+        $update = Category::where('id_food',$food)->update(['name'=>$request->name,'image'=>$request->image,'description'=>$request->description,'price'=>$request->price,'category'=>$request->category,'long'=>$request->long,'lat'=>$request->lat]);
 
         return response()->json($food, 200);
     }
@@ -74,8 +74,8 @@ if ($validator->fails()) {
      */
     public function food(Request $food)
     {
-        $food = $food->food;
-        return Food::where('id_food',$food) -> get();
+            $food = $food->food;
+            return Food::where('id_food',$food) -> get();
     }
 
     /**
@@ -84,7 +84,7 @@ if ($validator->fails()) {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $food)
+    public function destroy($food)
     {
         Food::where('id_food',$food) -> delete();
 
