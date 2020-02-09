@@ -11,6 +11,15 @@ use Carbon\Carbon;
 class MyBillsController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return MyBills::all();
+    }
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -19,9 +28,8 @@ class MyBillsController extends Controller
      */
     public function paid(Request $paid)
     {
-        $id_category = $paid->id_category;
-        $id_user = $paid->id_user;
-        return MyBills::where('status','paid') -> where('id_user',$id_user)-> where('id_category',$id_category)-> get();
+        $paid = $paid->paid;
+        return MyBills::where('status','paid') -> where('id_user',$paid)-> get();
     }
     /**
      * Store a newly created resource in storage.
@@ -76,9 +84,8 @@ class MyBillsController extends Controller
      */
     public function mustpay(Request $mustpay)
     {
-        $id_category = $mustpay->id_category;
-        $id_user = $mustpay->id_user;
-        return MyBills::where('status','mustpay') -> where('id_user',$id_user)-> where('id_category',$id_category)-> get();
+        $mustpay = $mustpay->mustpay;
+        return MyBills::where('status','mustpay') -> where('id_user',$mustpay)-> get();
     }
 
     /**
